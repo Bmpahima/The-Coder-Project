@@ -1,0 +1,668 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Outfit", sans-serif;
+}
+
+.home header {
+    margin-bottom: 30px;
+}
+
+.header-selected-bg {
+    background-repeat: no-repeat;
+    object-fit:none;
+    background-size: cover;
+    background-position: center; 
+    width: 100vw;
+    height: 50vh;
+    position: relative;
+    overflow: hidden;
+    
+}
+
+.header-background {
+    background-repeat: no-repeat;
+    object-fit: fill;
+    background: linear-gradient(323deg, #0f57a9, #448bea, #013170);
+    background-size: 600% 600%;
+    animation: AnimationName 3s ease infinite;
+    width: 100vw;
+    height: 50vh;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.custom-shape-divider-bottom-1729778907 {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-bottom-1729778907 svg {
+    position: relative;
+    display: block;
+    width: calc(152% + 1.3px);
+    height: 130px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom-1729778907 .shape-fill {
+    fill: #FFFFFF;
+}
+
+.home-title {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+}
+
+.home-title h1 {
+    font-size: 70px;
+    font-weight: 300;
+}
+
+.home-title h3 {
+    font-size: 40px;
+    font-weight: 100;
+}
+
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    list-style: none;
+    z-index: 300;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(255, 255, 255, 0.7);
+    color: #013170;
+    font-size: 18px;
+    width: 100%;
+    padding: 8px;
+    position: fixed;
+    transition: all 0.2s ease-in-out;
+}
+
+.navbar:hover {
+    background-color: rgb(255, 255, 255, 0.9);
+    scale: 1.01;
+}
+
+.navbar div {
+    padding: 5px 8px;
+    border-radius: 18px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.navbar div:hover {
+    box-shadow: 0 0 10px 1px rgb(0, 0, 0, 0.2);
+}
+
+.posts {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 40px;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.my-posts-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.post {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    transition: transform 0.2s;
+    min-height: 400px;
+    position: relative; 
+    overflow: hidden; 
+}
+
+.post-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: brightness(60%); 
+    transition: filter 0.3s ease-in-out; 
+    z-index: 1; 
+}
+
+.post-hover .post-background {
+    filter: brightness(100%); 
+}
+
+.post-hover {
+    transform: translateY(-10px);
+}
+
+.post-image {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 3;
+    overflow: hidden; 
+}
+
+.post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
+}
+
+.post-content {
+    position: relative;
+    z-index: 2; 
+    color: #fff;
+    text-align: left;
+}
+
+.post-title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.post-date {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.post-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.learn-more-btn {
+    text-decoration: none;
+    color: #fff;
+    background-color: #0d6edf;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 300;
+    transition: background-color 0.3s;
+}
+
+.learn-more-btn:hover {
+    background-color: #0056b3;
+}
+
+.post-page-body {
+    margin: 60px auto;
+    display: flex;
+    flex-wrap: nowrap;  
+    justify-content: center;
+    gap: 50px;  
+    padding: 20px;
+    max-width: 1200px;
+}
+
+.post-page-content {
+    width: 65%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 10px;
+    gap: 25px;
+    background-color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);  
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.post-page-content:hover {
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);  
+}
+
+.post-detail {
+    color: #666;  
+    font-size: 14px;
+}
+
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    width: 100%; 
+}
+
+.image-wrapper::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 60%; 
+    width: 100%;
+    background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)); 
+    z-index: 10;
+}
+
+.image-wrapper img {
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    z-index: 2; 
+}
+
+.post-page-content h3 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #044da5;
+}
+
+.post-page-content p:nth-of-type(2) {
+    font-size: 18px;
+    line-height: 1.7;  
+    color: #333;
+}
+
+.posts-nav {
+    width: 30%;
+    padding: 20px;
+    background-color: rgb(4, 77, 164, 0.9);
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.nav-posts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; 
+    margin-top: 20px;
+    width: 100%;
+}
+
+.nav-posts div {
+    background-color: #fff;
+    color: #333;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-posts div:hover {
+    transform: translateY(-5px);
+}
+
+.nav-posts img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.nav-posts h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #044da5;
+    margin-bottom: 10px;
+}
+
+.nav-posts p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+
+.my-posts-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: 300;
+    margin: 20px;
+}
+
+.myposts-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;  
+}
+
+.no-posts-message {
+    flex-grow: 1;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #444;
+    text-align: center;
+}
+
+.post-options {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 30px auto;
+    width: 65%;
+    position: relative;
+}
+
+.post-options button,
+.post-form-edit-add button,
+.forgot-form button,
+.code-form button,
+.verify-form button {
+    width: 120px;
+    height: 45px;
+    border: 3px solid #0056b3;
+    border-radius: 45px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: white;
+    font-size: 1.2em;
+    font-weight: 400;
+  }
+  
+.post-options button:hover,
+.post-form-edit-add button:hover,
+.forgot-form button:hover,
+.code-form button:hover,
+.verify-form button:hover{
+    background: #0056b3;
+    color: white;
+    font-size: 1.5em;
+  }
+
+footer {
+    margin-top: auto;  
+}
+
+
+.waves-footer {
+    position: relative;
+    height: 150px; 
+    width: 100%;
+    background-color: transparent;
+}
+
+.wave-footer {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url(../images/colored_wave.png);
+    background-size: 1000px 100px;
+    transition: bottom 1s ease;
+}
+
+.wave-footer::after {
+    content: "";
+    background-color: #044da5;
+}
+
+#wave11 {
+    animation: animate 30s linear infinite;
+    z-index: 100;
+    opacity: 1;
+    animation-delay: 0s;
+}
+
+#wave21 {
+    animation: animate2 15s linear infinite;
+    z-index: 99;
+    opacity: 0.5;
+    animation-delay: -5s;
+}
+
+#wave31 {
+    animation: animate3 30s linear infinite;
+    z-index: 98;
+    opacity: 0.2;
+    animation-delay: -2s;
+}
+
+#wave41 {
+    animation: animate4 5s linear infinite;
+    z-index: 97;
+    opacity: 0.7;
+    animation-delay: -5s;
+}
+
+@keyframes animate {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: 1000px;
+    }
+}
+
+@keyframes animate2 {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: -1000px;
+    }
+}
+
+@keyframes animate3 {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: 1000px;
+    }
+}
+
+@keyframes animate4 {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: -1000px;
+    }
+}
+
+.post-form-edit-add {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+}
+
+.post-form-edit-add input, 
+.post-form-edit-add textarea {
+    height: 30px;
+    width: 100%;
+    border: none;
+    padding: 12px; 
+    box-sizing: border-box; 
+    border-radius: 10px;
+    background-color: rgb(237, 237, 237);
+    font-size: 18px;
+}
+
+.post-form-edit-add textarea {
+    height: 400px;
+    resize: none; 
+    overflow: scroll; 
+}
+
+.add-container {
+    display: flex;
+    justify-content: center;
+}
+
+.footer {
+    height: 20vh; 
+    width: 100%;
+    position: relative;
+    z-index: 150;
+    background-color: #044da5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+}
+
+.footer-content {
+    z-index: 200; 
+}
+
+/* Styles for smaller screens */
+@media (max-width: 768px) {
+    .home-title h1 {
+        font-size: 36px;
+    }
+
+    .home-title h3 {
+        font-size: 24px;
+    }
+
+    .navbar {
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .navbar div {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
+
+    .add-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .post-page-content {
+        width: 90%;
+        max-width: 500px;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-form-edit-add {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .post-form-edit-add input,
+    .post-form-edit-add textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+    .post-form-edit-add textarea {
+        height: 200px;
+        resize: vertical;
+    }
+
+    .submit-btn {
+        width: 100%;
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 8px;
+        height: 40px;
+    }
+
+    .posts {
+        padding: 20px;
+        max-width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .post {
+        padding: 15px;
+        min-height: 300px;
+    }
+
+    .post-image {
+        height: 80px;
+        width: 80px;
+    }
+
+    .learn-more-btn {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    .post-page-body {
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .posts-nav,
+    .post-page-content {
+        width: 100%;
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    .nav-posts img {
+        height: 80px;
+    }
+
+    .my-posts-title {
+        font-size: 28px;
+        margin: 10px;
+    }
+
+    .footer {
+        height: auto;
+        font-size: 16px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .waves-footer {
+        height: 100px;
+    }
+
+    .wave-footer {
+        height: 60px;
+        background-size: 800px 80px;
+    }
+}
+
