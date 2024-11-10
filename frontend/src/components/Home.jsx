@@ -9,14 +9,23 @@ function Home() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/home/user/${userId}`)  
-            .then(res => res.json())  
-            .then(data => {
-                setPosts(data); 
-            })
-            .catch(error => {
+        async function fetchHomePage() {
+            try {
+                const response = await fetch(`http://localhost:3000/home/user/${userId}`);
+
+                if (!response.ok){
+                    throw new Error("Failed to fetch post");
+                }
+
+                const resData = await response.json();
+                setPosts(resData); 
+            }
+            catch (error) {
                 console.log("Error: " + error);
-            });
+            }
+        }
+        
+        fetchHomePage();
     }, [userId]); 
 
     return (

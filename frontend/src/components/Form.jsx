@@ -33,7 +33,7 @@ function Form(props) {
         } 
     });
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         const data = new FormData();
@@ -50,7 +50,7 @@ function Form(props) {
             }
         }
 
-        axios.post('http://localhost:3000/', data, {
+        await axios.post('http://localhost:3000/', data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

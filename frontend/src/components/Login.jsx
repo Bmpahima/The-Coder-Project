@@ -44,18 +44,21 @@ function Login() {
         }
     };
 
-    const submitForgotPassword = (event) => {
+    const submitForgotPassword = async (event) => {
         event.preventDefault();
-        axios.post('http://localhost:3000/forgot-my-password', {email: email})
-            .then(response => {
-                setVerificationCode(response.data.code);
-                setTimer(60); 
-                setErrorMessage(""); 
-            })
-            .catch(error => {
-                setErrorMessage(error.response.data.error || "An error occurred");
-                console.log("Error: " + error);
-            });
+        try {
+            const response = await  axios.post('http://localhost:3000/forgot-my-password', {email: email});
+
+            const resData = response.data; 
+            setVerificationCode(resData.code);
+            setTimer(60); 
+            setErrorMessage(""); 
+            
+        }
+        catch (error) {
+            setErrorMessage(error.response.data.error || "An error occurred");
+            console.log("Error: " + error);
+        }
     }
 
     const submitVerificationCode = (event) => {
@@ -76,7 +79,7 @@ function Login() {
         }
     }
 
-    const submitNewPassword = (event) => {
+    const submitNewPassword = async (event) => {
         event.preventDefault();
         
         if (newPassword !== confirmedPassword){
@@ -84,19 +87,21 @@ function Login() {
             return;
         }
 
-        axios.post('http://localhost:3000/submit-new-password', {
-            email: email,
-            newPassword: newPassword
-        })
-        .then(response => {
-            alert(response.data.message);
+        try {
+            const response = await axios.post('http://localhost:3000/submit-new-password', {
+                email: email,
+                newPassword: newPassword
+            });
+
+            const resData = response.data;
+            alert(resData.message);
             resetForgotPasswordState();
             navigate('/');
-        })
-        .catch(error => {
+        }
+        catch (error) {
             setErrorMessage(error.response.data.error || "An error occurred");
             console.log("Error: " + error);
-        });
+        }
     }
 
     const resetForgotPasswordState = () => {

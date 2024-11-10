@@ -17,28 +17,31 @@ function PostPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:3000/user/${userId}/post/${postId}`) 
-            .then(res => res.json())  
-            .then(data => {
-                setPost(data); 
-                setEditedPost(data);
-            })
-            .catch(error => {
+        async function fetchPost () {
+            try {
+                const postResponse = await fetch(`http://localhost:3000/user/${userId}/post/${postId}`);
+                if (!postResponse.ok){
+                    throw new Error("Failed to fetch post");
+                }
+                const postResData = await postResponse.json();
+                setPost(postResData); 
+                setEditedPost(postResData);
+
+                const randomPostsResponse = await fetch(`http://localhost:3000/user/${userId}/post/${postId}/random-posts`);
+                if (!randomPostsResponse.ok){
+                    throw new Error("Failed to fetch random posts");
+                }
+                const randomPostsResData = await randomPostsResponse.json();
+                setRelatedPosts(randomPostsResData);
+            }
+            catch (error) {
                 console.log("Error: " + error);
-            });
+            }
+        }
 
-        fetch(`http://localhost:3000/user/${userId}/post/${postId}/random-posts`)
-            .then(res => {
-                if (!res.ok) throw new Error('Failed to fetch random posts');
-                return res.json();
-            })
-            .then(data => setRelatedPosts(data))
-            .catch(error => console.log("Error:", error));
+        fetchPost();
+        
     }, [userId, postId]); 
-
-    const onEditPost = () => {
-        setIsEdit(true);
-    }
 
     const onDrop = useCallback((acceptedFiles) => {
         setPostImgFile(acceptedFiles[0]);  
@@ -56,7 +59,7 @@ function PostPage() {
         }));
     }
     
-    const submitPostEdit = (event) => {
+    const submitPostEdit = async (event) => {
         event.preventDefault();
     
         const data = new FormData();
@@ -66,37 +69,43 @@ function PostPage() {
         if (postImgFile) {
             data.append("postImgFile", postImgFile); 
         }
-    
-        axios.patch(`http://localhost:3000/user/${userId}/post/${postId}`, data, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-        .then(response => {
+
+        try {
+            const response = await axios.patch(`http://localhost:3000/user/${userId}/post/${postId}`, data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
             setIsEdit(false);
             setPost(response.data.post);
             navigate(`/my-posts/user/${userId}`);
-        })
-        .catch(error => {
+        }
+        catch (error) {
             console.error('Error:', error); 
-        });
+        }
     }
     
     
     const onDeletePost = () => {
-        if (window.confirm("Are you sure you want to delete this post?")) {
-            fetch(`http://localhost:3000/user/${userId}/post/${postId}`, {
-                method: "DELETE"
-            }) 
-            .then(res => res.json())  
-            .then(data => {
-                if (data.message === "The post has been successfully deleted") {
+
+        async function submitDeletion() {
+            try {
+                const response = await fetch(`http://localhost:3000/user/${userId}/post/${postId}`, {
+                    method: "DELETE"
+                });
+                const resData = await response.json(); 
+                if (resData.message === "The post has been successfully deleted") {
                     navigate(`/home/user/${userId}`); 
                 }
-            })
-            .catch(error => {
+            }
+            catch (error) {
                 console.log("Error: " + error);
-            });
+            }
+        }
+
+        if (window.confirm("Are you sure you want to delete this post?")) {
+            submitDeletion();
         }
     };
     
@@ -144,7 +153,7 @@ function PostPage() {
                         <p>{post.content}</p>
                         { Number(userId) === Number(post.author) && (
                             <div className="post-options">
-                                <button onClick={onEditPost}>Edit</button>
+                                <button onClick={() => { setIsEdit(true) }}>Edit</button>
                                 <button onClick={onDeletePost}>Delete</button>
                             </div>
                         )}

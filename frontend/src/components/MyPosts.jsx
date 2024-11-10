@@ -36,7 +36,7 @@ function MyPosts() {
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: 'image/*' });
 
-    const submitNewPost = (event) => {
+    const submitNewPost =async (event) => {
         event.preventDefault(); 
         console.log("Submitting new post:", newPost);
 
@@ -47,32 +47,36 @@ function MyPosts() {
         if (postImgFile) {
             data.append("postImgFile", postImgFile); 
         }
+        try{ 
+            const response = await axios.post(`http://localhost:3000/my-posts/user/${userId}`, data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            const resData = await response.data;
 
-        axios.post(`http://localhost:3000/my-posts/user/${userId}`, data, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-        .then(response => {
-            console.log("Post added:", response.data);
-            navigate(`/user/${userId}/post/${response.data.post.id}`);        
-        })
-        .catch(error => {
-            setErrorMessage(error.response?.data?.error || error.message); // שמירת הודעת השגיאה בלבד
+            console.log("Post added:", resData);
+            navigate(`/user/${userId}/post/${resData.post.id}`);       
+        }
+        catch(error) {
+            setErrorMessage(error.response?.data?.error || error.message); 
             console.error('Error:', error); 
-        });
+        };
     }
 
     useEffect(() => {
-        fetch(`http://localhost:3000/my-posts/user/${userId}`)  
-            .then(res => res.json())  
-            .then(data => {
-                setPosts(data); 
+        async function fetchMyPosts() {
+            try {
+                const response = await fetch(`http://localhost:3000/my-posts/user/${userId}`);
+                const resData = await response.json();
+                setPosts(resData); 
                 setErrorMessage("");
-            })
-            .catch(error => {
+            }
+            catch (error) {
                 console.log("Error: " + error);
-            });
+            }
+        }
+        fetchMyPosts();
     }, [userId]);  
     
 
